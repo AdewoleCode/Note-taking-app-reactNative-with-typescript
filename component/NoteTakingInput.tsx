@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react"
 import { TextInput, StyleSheet, Button } from "react-native"
-import { getNote } from "../services/noteServices"
+import { getNote, saveNote } from "../services/noteServices"
 
 type Props = {
-    saveNote: (text: string) => void
     noteId: string | undefined
 }
 
-const NoteTakingInput: React.FC<Props> = ({ saveNote, noteId }) => {
+const NoteTakingInput: React.FC<Props> = ({ noteId }) => {
 
     const [text, setText] = useState<string>("")
 
@@ -16,6 +15,10 @@ const NoteTakingInput: React.FC<Props> = ({ saveNote, noteId }) => {
             getNote(noteId).then(result => setText(result?.text ?? ""))
         }
     }, [])
+
+    const saveNoteHandler = () => {
+        saveNote(text, noteId)
+    }
 
     return (
         <>
@@ -29,7 +32,7 @@ const NoteTakingInput: React.FC<Props> = ({ saveNote, noteId }) => {
 
             <Button
                 title='Save note'
-                onPress={() => saveNote(text)}
+                onPress={saveNoteHandler}
             />
         </>
     )
