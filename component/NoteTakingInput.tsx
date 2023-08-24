@@ -1,13 +1,21 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { TextInput, StyleSheet, Button } from "react-native"
+import { getNote } from "../services/noteServices"
 
 type Props = {
     saveNote: (text: string) => void
+    noteId: string | undefined
 }
 
-const NoteTakingInput: React.FC<Props>  = ({saveNote}) => {
+const NoteTakingInput: React.FC<Props> = ({ saveNote, noteId }) => {
 
     const [text, setText] = useState<string>("")
+
+    useEffect(() => {
+        if (noteId) {
+            getNote(noteId).then(result => setText(result?.text ?? ""))
+        }
+    }, [])
 
     return (
         <>

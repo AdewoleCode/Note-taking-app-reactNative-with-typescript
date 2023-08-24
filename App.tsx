@@ -4,12 +4,9 @@ import HomeScreen from './screens/HomeScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import EditNoteScreen from './screens/editNoteScreen';
 import { RootStackParamList } from './types';
-import { Button } from 'react-native/Libraries/Components/Button';
-import { useNavigation } from "@react-navigation/native"
-import { ScreenNavigationProp } from "./types"
+import NewNoteButtonIcon from './component/NewNoteButtonIcon';
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
-const navigation = useNavigation<ScreenNavigationProp>()
 
 export default function App() {
 
@@ -22,12 +19,7 @@ export default function App() {
           component={HomeScreen}
           options={{
             headerTitle: "All notes",
-            headerRight: () => (
-              <Button
-                title='New Note'
-                onPress={() => navigation.navigate("EditNote")}
-              />
-            )
+            headerRight: () => (<NewNoteButtonIcon />)
           }}
         />
         <Stack.Screen name="EditNote" component={EditNoteScreen} />
