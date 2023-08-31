@@ -8,7 +8,7 @@ const NewNoteButtonIcon: React.FC = () => {
     const navigation = useNavigation<ScreenNavigationProp>()
     return (
         <Pressable
-            onPress={() => navigation.navigate("EditNote", { noteId: "" })}
+            onPress={() => navigation.navigate("EditNote", { noteId: undefined })}
         >
             {/* up for discussion. could cause bugs */}
             <FontAwesome
